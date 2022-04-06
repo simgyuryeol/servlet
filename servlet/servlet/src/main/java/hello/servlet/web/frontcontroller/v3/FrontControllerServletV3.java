@@ -34,8 +34,6 @@ public class FrontControllerServletV3 extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         String requestURI = request.getRequestURI();
 
         ControllerV3 controller = controllerMap.get(requestURI); //MAP에서 해당 값을 찾음, 키를 넣으면 해당하는 값이 나온다
@@ -45,7 +43,6 @@ public class FrontControllerServletV3 extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-
         //paramMap을 넘겨줌
         Map<String, String> pramMap = createParamMap(request);
         ModelView mv = controller.process(pramMap);//오버라이드된 해당 인터페이스를 호출
@@ -55,7 +52,6 @@ public class FrontControllerServletV3 extends HttpServlet {
         MyView view = viewResolver(viewName);
 
         view.render(mv.getModel(),request,response);
-
     }
 
     private MyView viewResolver(String viewName) {
